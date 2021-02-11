@@ -1,6 +1,6 @@
-# futureproof
+# Futureproof
 
-Android and Web aplication for the Futureproof project.
+Android and Web aplication for the Futureproof project. Changes coming up...
 
 ## Getting Started
 
