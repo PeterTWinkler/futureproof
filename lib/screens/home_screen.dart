@@ -9,7 +9,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(context: context, title: Title(color: Colors.white, child: Text('Futureproof'),),),
+      appBar: DefaultAppBar(),
+      //MyAppBar(context: context),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

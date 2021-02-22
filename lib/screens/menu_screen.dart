@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:futureproof/components/appbar.dart';
 
 class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('title'),
+      appBar: DefaultAppBar(
+        title: Text('Menu'),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 50.0),
