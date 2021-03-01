@@ -13,19 +13,7 @@ class DefaultAppBar extends StatelessWidget with PreferredSizeWidget{
   Widget build(BuildContext context) {
     return AppBar(
       title: title ?? Text('Futureproof'),
-      actions: actions ?? <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(right: 50.0),
-          //TO BE REMOVED in production; added only to avoid 'debug' ribbon
-          child: IconButton(
-              icon: Icon(Icons.menu),
-              color: Colors.white,
-              onPressed: () {
-                Navigator.pushNamed(context, '/menu');
-              }
-          ),
-        ),
-      ],
+      actions: actions ?? <Widget>[],
     );
   }
 }
