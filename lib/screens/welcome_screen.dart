@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
+
+  static const id = '/welcome';
+  static const displayName = 'Welcome';
+
   @override
   Widget build(BuildContext context) {
     //Size size = MediaQuery.of(context).size;

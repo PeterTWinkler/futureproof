@@ -8,23 +8,31 @@ import 'package:futureproof/screens/recommendations_screen.dart';
 import 'package:futureproof/screens/welcome_screen.dart';
 
 List<String> routeNames = [
-  '/',
-  '/login',
-  '/welcome',
-  '/progress',
-  '/data_form',
-  '/recommendations',
-  '/finances',
+  HomeScreen.id,
+  LoginScreen.id,
+  WelcomeScreen.id,
+  ProgressScreen.id,
+  DataFormScreen.id,
+  RecommendationsScreen.id,
+  FinancesScreen.id,
 ];
 
 Map<String, Widget Function(BuildContext)> routesMap = {
-  '/': (context) => HomeScreen(),
-  '/login': (context) => LoginScreen(),
-  '/welcome': (context) => WelcomeScreen(),
-  '/progress': (context) => ProgressScreen(),
-  '/data_form': (context) => DataFormScreen(),
-  '/recommendations': (context) => RecommendationsScreen(),
-  '/finances': (context) => FinancesScreen(),
+  HomeScreen.id: (context) => HomeScreen(),
+  LoginScreen.id: (context) => LoginScreen(),
+  WelcomeScreen.id: (context) => WelcomeScreen(),
+  ProgressScreen.id: (context) => ProgressScreen(),
+  DataFormScreen.id: (context) => DataFormScreen(),
+  RecommendationsScreen.id: (context) => RecommendationsScreen(),
+  FinancesScreen.id: (context) => FinancesScreen(),
 };
 
-//TODO: Add Map for screen display names
+Map<String, String> displayNamesMap = {
+  HomeScreen.id: HomeScreen.displayName,
+  LoginScreen.id: LoginScreen.displayName,
+  WelcomeScreen.id: WelcomeScreen.displayName,
+  ProgressScreen.id: ProgressScreen.displayName,
+  DataFormScreen.id: DataFormScreen.displayName,
+  RecommendationsScreen.id: RecommendationsScreen.displayName,
+  FinancesScreen.id: FinancesScreen.displayName,
+};

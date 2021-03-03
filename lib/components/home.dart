@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:futureproof/components/my_appbar.dart';
 import 'package:futureproof/components/my_drawer.dart';
 
-class ProgressScreen extends StatelessWidget {
-  static const id = '/progress';
-  static const displayName = 'Progress';
+class Home extends StatelessWidget {
+  Home({this.body});
+
+  final Widget body;
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +13,8 @@ class ProgressScreen extends StatelessWidget {
       appBar: MyAppBar(),
       drawer: MyDrawer(),
       body: SafeArea(
-        child: Container(),
+        child: body,
       ),
     );
   }
 }
-

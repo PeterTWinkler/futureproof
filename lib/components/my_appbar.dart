@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DefaultAppBar extends StatelessWidget with PreferredSizeWidget{
-  DefaultAppBar({this.title, this.actions});
+class MyAppBar extends StatelessWidget with PreferredSizeWidget{
+  MyAppBar({this.title, this.actions});
 
   final Text title;
   final List<Widget> actions;
