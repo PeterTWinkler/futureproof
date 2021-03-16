@@ -1,20 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:futureproof/components/my_appbar.dart';
 import 'package:futureproof/components/my_drawer.dart';
 import 'package:futureproof/screens/welcome_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const id = '/login';
-  static const displayName = 'Login';
-  static const bool loginAccessible = false; //only logged-in users can visit
+class RegisterScreen extends StatefulWidget {
+  static const id = '/register';
+  static const displayName = 'Register';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   String email;
@@ -33,35 +31,34 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Center(
             child: Column(
               children: [
-                Text('Welcome user!'),
+                Text('Register here'),
                 TextField(
-                  decoration: InputDecoration(hintText: "Email"),
+                  keyboardType: TextInputType.emailAddress,
                   onChanged: (value) {
                     email = value;
                   },
+                  decoration: InputDecoration(hintText: "Email"),
                 ),
                 TextField(
                   obscureText: true,
-                  decoration: InputDecoration(hintText: "Password"),
                   onChanged: (value) {
                     password = value;
                   },
+                  decoration: InputDecoration(hintText: "Password"),
                 ),
                 TextButton(
                   onPressed: () async {
                     try {
-                      final user = await _auth.signInWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      );
-                      if (user != null) {
+                      final newUser = await _auth.createUserWithEmailAndPassword(
+                                              email: email, password: password);
+                      if (newUser != null) {
                         Navigator.pushNamed(context, WelcomeScreen.id);
                       }
                     } catch (e) {
                       print(e);
                     }
                   },
-                  child: Text("Login"),
+                  child: Text('Register'),
                 )
               ],
             ),

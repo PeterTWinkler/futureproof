@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "681358401888",
+    "project_id": "futureproof-736c1",
+    "storage_bucket": "futureproof-736c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681358401888:android:2a2ee3930b1fa4ff4c7e05",
+        "android_client_info": {
+          "package_name": "com.wherop.futureproof"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681358401888-03r7hikk3t6hra9rricv6d6nadj11qnm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQvZGkki0TNiwxzmvEvGO8Baj9Q_XH3Gw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681358401888-03r7hikk3t6hra9rricv6d6nadj11qnm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
