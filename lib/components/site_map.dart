@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:futureproof/screens/form_farmer_screen.dart';
 import 'package:futureproof/screens/form_root_screen.dart';
 import 'package:futureproof/screens/finances_screen.dart';
+import 'package:futureproof/screens/form_worker_screen.dart';
 import 'package:futureproof/screens/home_screen.dart';
 import 'package:futureproof/screens/login_screen.dart';
 import 'package:futureproof/screens/progress_screen.dart';
@@ -16,6 +17,8 @@ List<String> routeNames = [
   WelcomeScreen.id,
   ProgressScreen.id,
   FormRootScreen.id,
+  FormFarmerScreen.id,
+  FormWorkerScreen.id,
   RecommendationsScreen.id,
   FinancesScreen.id,
 ];
@@ -28,6 +31,7 @@ Map<String, Widget Function(BuildContext)> routesMap = {
   ProgressScreen.id: (context) => ProgressScreen(),
   FormRootScreen.id: (context) => FormRootScreen(),
   FormFarmerScreen.id: (context) => FormFarmerScreen(),
+  FormWorkerScreen.id: (context) => FormWorkerScreen(),
   RecommendationsScreen.id: (context) => RecommendationsScreen(),
   FinancesScreen.id: (context) => FinancesScreen(),
 
@@ -40,6 +44,8 @@ Map<String, String> displayNamesMap = {
   WelcomeScreen.id: WelcomeScreen.displayName,
   ProgressScreen.id: ProgressScreen.displayName,
   FormRootScreen.id: FormRootScreen.displayName,
+  FormFarmerScreen.id: FormFarmerScreen.displayName,
+  FormWorkerScreen.id: FormWorkerScreen.displayName,
   RecommendationsScreen.id: RecommendationsScreen.displayName,
   FinancesScreen.id: FinancesScreen.displayName,
 };

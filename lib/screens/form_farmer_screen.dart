@@ -4,7 +4,7 @@ import 'package:futureproof/components/my_drawer.dart';
 
 class FormFarmerScreen extends StatefulWidget {
   static const id = '/form_farmer';
-  static const displayName = 'Data Form';
+  static const displayName = 'Data Form (farmer page)';
 
   @override
   _FormFarmerScreenState createState() => _FormFarmerScreenState();
