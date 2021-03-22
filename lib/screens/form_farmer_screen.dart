@@ -28,6 +28,20 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
             child: Form(
               child: Column(
                 children: [
+                  // produce?
+                  Container(
+                    child: Column(
+                      children: [
+                        Text('What do you produce on your farm?'),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Enter data',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // own land?
                   Container(
                     child: Column(
                       children: [
@@ -73,6 +87,7 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                       ],
                     ),
                   ),
+                  // land terrain?
                   Container(
                     child: Column(
                       children: [
@@ -85,6 +100,7 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                       ],
                     ),
                   ),
+                  // land climate?
                   Container(
                     child: Column(
                       children: [
@@ -97,6 +113,7 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                       ],
                     ),
                   ),
+                  // land investment?
                   Container(
                     child: Column(
                       children: [
@@ -110,21 +127,10 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    child: Column(
-                      children: [
-                        Text('What do you produce on your farm?'),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter data',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   SizedBox(
                     height: 16.0,
                   ),
+                  //buttons
                   Container(
                     child: Row(
                       children: [

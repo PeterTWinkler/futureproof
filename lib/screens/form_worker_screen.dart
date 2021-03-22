@@ -26,10 +26,11 @@ class _FormWorkerScreenState extends State<FormWorkerScreen> {
             child: Form(
               child: Column(
                 children: [
+                  //describe occupation?
                   Container(
                     child: Column(
                       children: [
-                        Text('What is your occupation?'),
+                        Text('Describe your occupation.'),
                         TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Enter data',
@@ -38,6 +39,7 @@ class _FormWorkerScreenState extends State<FormWorkerScreen> {
                       ],
                     ),
                   ),
+                  //skills?
                   Container(
                     child: Column(
                       children: [
@@ -50,6 +52,7 @@ class _FormWorkerScreenState extends State<FormWorkerScreen> {
                       ],
                     ),
                   ),
+                  //certificates?
                   Container(
                     child: Column(
                       children: [
@@ -65,6 +68,7 @@ class _FormWorkerScreenState extends State<FormWorkerScreen> {
                   SizedBox(
                     height: 16.0,
                   ),
+                  //buttons
                   Container(
                     child: Row(
                       children: [

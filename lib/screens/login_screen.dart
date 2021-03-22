@@ -8,7 +8,7 @@ import 'package:futureproof/screens/welcome_screen.dart';
 class LoginScreen extends StatefulWidget {
   static const id = '/login';
   static const displayName = 'Login';
-  static const bool loginAccessible = false; //only logged-in users can visit
+  //static const bool loginAccessible = false; //only logged-in users can visit
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
