@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:futureproof/components/my_appbar.dart';
 import 'package:futureproof/components/my_drawer.dart';
+import 'package:futureproof/screens/form_completed_screen.dart';
+import 'package:futureproof/screens/form_root_screen.dart';
 
 class FormWorkerScreen extends StatefulWidget {
   static const id = '/form_worker';
@@ -11,6 +14,12 @@ class FormWorkerScreen extends StatefulWidget {
 }
 
 class _FormWorkerScreenState extends State<FormWorkerScreen> {
+  final _firestore = FirebaseFirestore.instance;
+
+  String _occupationDescription;
+  String _skills;
+  String _certificates;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +35,7 @@ class _FormWorkerScreenState extends State<FormWorkerScreen> {
             child: Form(
               child: Column(
                 children: [
-                  //describe occupation?
+                  // Collects occupationDescription.
                   Container(
                     child: Column(
                       children: [
@@ -35,11 +44,16 @@ class _FormWorkerScreenState extends State<FormWorkerScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _occupationDescription = value;
+                            });
+                          },
                         ),
                       ],
                     ),
                   ),
-                  //skills?
+                  // Collects skills.
                   Container(
                     child: Column(
                       children: [
@@ -48,19 +62,30 @@ class _FormWorkerScreenState extends State<FormWorkerScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _skills = value;
+                            });
+                          },
                         ),
                       ],
                     ),
                   ),
-                  //certificates?
+                  // Collects certificates.
                   Container(
                     child: Column(
                       children: [
-                        Text('What certified qualifications have you acquired?'),
+                        Text(
+                            'What certified qualifications have you acquired?'),
                         TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _certificates = value;
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -68,12 +93,16 @@ class _FormWorkerScreenState extends State<FormWorkerScreen> {
                   SizedBox(
                     height: 16.0,
                   ),
-                  //buttons
+                  // Buttons
                   Container(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
                           onPressed: () {
+                            formData['occupationDescription'] = null;
+                            formData['skills'] = null;
+                            formData['certificates'] = null;
                             Navigator.pop(context);
                           },
                           child: Text(
@@ -85,10 +114,20 @@ class _FormWorkerScreenState extends State<FormWorkerScreen> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            //Navigator.pushNamed(context, routeName);
+                            formData['occupationDescription'] =
+                                _occupationDescription;
+                            formData['skills'] = _skills;
+                            formData['certificates'] = _certificates;
+                            print(formData);
+                            _firestore
+                                .collection(FormRootScreen.collectionID)
+                                .add(formData);
+                            print('formData sent to Firebase.');
+                            Navigator.pushNamed(
+                                context, FormCompletedScreen.id);
                           },
                           child: Text(
-                            'Next'.toUpperCase(),
+                            'Submit'.toUpperCase(),
                           ),
                         ),
                       ],

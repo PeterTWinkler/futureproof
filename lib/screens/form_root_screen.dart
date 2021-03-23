@@ -3,10 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:futureproof/components/my_appbar.dart';
 import 'package:futureproof/components/my_drawer.dart';
 import 'package:futureproof/screens/form_farmer_screen.dart';
+import 'package:futureproof/screens/form_worker_screen.dart';
+
+//This Map will be filled and saved.
+Map<String, dynamic> formData = {
+  //Collected on root page.
+  'email': null,
+  'isFarmer': null,
+  'occupation': null,
+  'isSelfEmployed': null,
+  'country': null,
+  'settlement': null,
+  //Collected on farmer page
+  'produce': null,
+  'ownLand': null,
+  'landTerrain': null,
+  'landClimate': null,
+  'landInvestment': null,
+  //Collected on worker page.
+  'occupationDescription': null,
+  'skills': null,
+  'certificates': null,
+};
 
 class FormRootScreen extends StatefulWidget {
   static const id = '/form_root';
   static const displayName = 'Data Form';
+  static const collectionID= 'userDataForms';
 
   @override
   _FormRootScreenState createState() => _FormRootScreenState();
@@ -23,33 +46,23 @@ class _FormRootScreenState extends State<FormRootScreen> {
     }
   }
 
-  int _radioGroup0 = 0;
-  bool _farmerButtonValue = false;
-  void _farmerButtonChanged(bool newValue) {
-    setState(() {
-      _farmerButtonValue = newValue;
-    });
-  }
+  // The data recorded from the form inputs.
 
-  Map formData = {
-    //root page
-    'email': '',
-    'isFarmer': null,
-    'occupation': '',
-    'selfEmployed': null,
-    'country': '',
-    'settlement': '',
-    //farmer page
-    'produce': '',
-    'ownLand': null,
-    'landTerrain': '',
-    'landClimate': '',
-    'landInvestment': '',
-    //worker page
-    'occupationDescription': '',
-    'skills': '',
-    'certificates': '',
-  };
+  String _email;
+  bool _isFarmer = false; // The current value of CheckboxListTile.
+
+  // This value will be submitted.
+  // (_occupationFieldValue will not.)
+  String _occupation;
+  bool _isSelfEmployed;
+  String _country;
+  String _settlement;
+  int _selfEmployedRadioGroup = 0;
+
+  // _occupation String recovers TextFormField's value when checkbox is
+  // changed from true to false. This is not directly submitted
+  // to the fromData Map.
+  String _occupationFieldValue;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +79,7 @@ class _FormRootScreenState extends State<FormRootScreen> {
             child: Form(
               child: Column(
                 children: [
-                  //email?
+                  //Collects email.
                   Container(
                     child: Column(
                       children: [
@@ -77,33 +90,46 @@ class _FormRootScreenState extends State<FormRootScreen> {
                           ),
                           onChanged: (value) {
                             setState(() {
-                              formData['email'] = value;
+                              _email = value;
                             });
                           },
                         ),
                       ],
                     ),
                   ),
-                  //occupation?
+                  //Collects occupation.
                   Container(
                     child: Column(
                       children: [
                         Text('What is your occupation?'),
                         CheckboxListTile(
                           title: Text('I am a farmer'),
-                          value: _farmerButtonValue,
-                          onChanged: _farmerButtonChanged,
+                          value: _isFarmer,
+                          onChanged: (bool newValue) {
+                            setState(() {
+                              _isFarmer = newValue;
+                              _occupation =
+                                  _isFarmer ? 'farmer' : _occupationFieldValue;
+                            });
+                          },
                         ),
                         Text('or...'),
                         TextFormField(
+                          enabled: !_isFarmer,
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _occupation = value;
+                              _occupationFieldValue = value;
+                            });
+                          },
                         ),
                       ],
                     ),
                   ),
-                  //self-employed?
+                  //Collects isSelfEmployed
                   Container(
                     child: Column(
                       children: [
@@ -116,10 +142,11 @@ class _FormRootScreenState extends State<FormRootScreen> {
                                 children: [
                                   Radio(
                                     value: 1,
-                                    groupValue: _radioGroup0,
+                                    groupValue: _selfEmployedRadioGroup,
                                     onChanged: (value) {
                                       setState(() {
-                                        _radioGroup0 = value;
+                                        _isSelfEmployed = true;
+                                        _selfEmployedRadioGroup = value;
                                       });
                                     },
                                   ),
@@ -133,10 +160,11 @@ class _FormRootScreenState extends State<FormRootScreen> {
                                 children: [
                                   Radio(
                                     value: 2,
-                                    groupValue: _radioGroup0,
+                                    groupValue: _selfEmployedRadioGroup,
                                     onChanged: (value) {
                                       setState(() {
-                                        _radioGroup0 = value;
+                                        _isSelfEmployed = false;
+                                        _selfEmployedRadioGroup = value;
                                       });
                                     },
                                   ),
@@ -158,6 +186,11 @@ class _FormRootScreenState extends State<FormRootScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _country = value;
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -171,6 +204,11 @@ class _FormRootScreenState extends State<FormRootScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _settlement = value;
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -178,12 +216,31 @@ class _FormRootScreenState extends State<FormRootScreen> {
                   SizedBox(
                     height: 16.0,
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, FormFarmerScreen.id);
-                    },
-                    child: Text(
-                      'Next'.toUpperCase(),
+                  //buttons
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            formData['email'] = _email;
+                            formData['isFarmer'] = _isFarmer;
+                            formData['occupation'] = _occupation;
+                            formData['isSelfEmployed'] = _isSelfEmployed;
+                            formData['country'] = _country;
+                            formData['settlement'] = _settlement;
+                            print(formData);
+                            if (_isFarmer) {
+                              Navigator.pushNamed(context, FormFarmerScreen.id);
+                            } else {
+                              Navigator.pushNamed(context, FormWorkerScreen.id);
+                            }
+                          },
+                          child: Text(
+                            'Next'.toUpperCase(),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

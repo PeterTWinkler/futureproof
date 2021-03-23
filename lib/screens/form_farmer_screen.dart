@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:futureproof/components/my_appbar.dart';
 import 'package:futureproof/components/my_drawer.dart';
+import 'package:futureproof/screens/form_completed_screen.dart';
+import 'package:futureproof/screens/form_root_screen.dart';
 
 class FormFarmerScreen extends StatefulWidget {
   static const id = '/form_farmer';
@@ -11,7 +14,15 @@ class FormFarmerScreen extends StatefulWidget {
 }
 
 class _FormFarmerScreenState extends State<FormFarmerScreen> {
-  int _radioGroup0 = 0;
+  final _firestore = FirebaseFirestore.instance;
+
+  String _produce;
+  bool _ownLand;
+  String _landTerrain;
+  String _landClimate;
+  String _landInvestment;
+
+  int _ownLandRadioGroup = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +39,7 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
             child: Form(
               child: Column(
                 children: [
-                  // produce?
+                  // Collects produce.
                   Container(
                     child: Column(
                       children: [
@@ -37,11 +48,16 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _produce = value;
+                            });
+                          },
                         ),
                       ],
                     ),
                   ),
-                  // own land?
+                  // Collects ownLand.
                   Container(
                     child: Column(
                       children: [
@@ -54,10 +70,11 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                                 children: [
                                   Radio(
                                     value: 1,
-                                    groupValue: _radioGroup0,
+                                    groupValue: _ownLandRadioGroup,
                                     onChanged: (value) {
                                       setState(() {
-                                        _radioGroup0 = value;
+                                        _ownLand = true;
+                                        _ownLandRadioGroup = value;
                                       });
                                     },
                                   ),
@@ -71,10 +88,11 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                                 children: [
                                   Radio(
                                     value: 2,
-                                    groupValue: _radioGroup0,
+                                    groupValue: _ownLandRadioGroup,
                                     onChanged: (value) {
                                       setState(() {
-                                        _radioGroup0 = value;
+                                        _ownLand = false;
+                                        _ownLandRadioGroup = value;
                                       });
                                     },
                                   ),
@@ -87,7 +105,7 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                       ],
                     ),
                   ),
-                  // land terrain?
+                  // Collects landTerrain.
                   Container(
                     child: Column(
                       children: [
@@ -96,11 +114,16 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _landTerrain = value;
+                            });
+                          },
                         ),
                       ],
                     ),
                   ),
-                  // land climate?
+                  // Collects landClimate.
                   Container(
                     child: Column(
                       children: [
@@ -109,11 +132,16 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _landClimate = value;
+                            });
+                          },
                         ),
                       ],
                     ),
                   ),
-                  // land investment?
+                  // Collects landInvestment.
                   Container(
                     child: Column(
                       children: [
@@ -123,6 +151,11 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter data',
                           ),
+                          onChanged: (value) {
+                            setState(() {
+                              _landInvestment = value;
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -130,12 +163,18 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                   SizedBox(
                     height: 16.0,
                   ),
-                  //buttons
+                  // Buttons
                   Container(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
                           onPressed: () {
+                            formData['produce'] = null;
+                            formData['ownLand'] = null;
+                            formData['landTerrain'] = null;
+                            formData['landClimate'] = null;
+                            formData['landInvestment'] = null;
                             Navigator.pop(context);
                           },
                           child: Text(
@@ -147,10 +186,21 @@ class _FormFarmerScreenState extends State<FormFarmerScreen> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            //Navigator.pushNamed(context, routeName);
+                            formData['produce'] = _produce;
+                            formData['ownLand'] = _ownLand;
+                            formData['landTerrain'] = _landTerrain;
+                            formData['landClimate'] = _landClimate;
+                            formData['landInvestment'] = _landInvestment;
+                            print(formData);
+                            _firestore
+                                .collection(FormRootScreen.collectionID)
+                                .add(formData);
+                            print('formData sent to Firebase.');
+                            Navigator.pushNamed(
+                                context, FormCompletedScreen.id);
                           },
                           child: Text(
-                            'Next'.toUpperCase(),
+                            'Submit'.toUpperCase(),
                           ),
                         ),
                       ],

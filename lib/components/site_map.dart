@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:futureproof/screens/form_completed_screen.dart';
 import 'package:futureproof/screens/form_farmer_screen.dart';
 import 'package:futureproof/screens/form_root_screen.dart';
 import 'package:futureproof/screens/finances_screen.dart';
@@ -17,8 +18,6 @@ List<String> routeNames = [
   WelcomeScreen.id,
   ProgressScreen.id,
   FormRootScreen.id,
-  FormFarmerScreen.id,
-  FormWorkerScreen.id,
   RecommendationsScreen.id,
   FinancesScreen.id,
 ];
@@ -32,6 +31,7 @@ Map<String, Widget Function(BuildContext)> routesMap = {
   FormRootScreen.id: (context) => FormRootScreen(),
   FormFarmerScreen.id: (context) => FormFarmerScreen(),
   FormWorkerScreen.id: (context) => FormWorkerScreen(),
+  FormCompletedScreen.id: (context) => FormCompletedScreen(),
   RecommendationsScreen.id: (context) => RecommendationsScreen(),
   FinancesScreen.id: (context) => FinancesScreen(),
 

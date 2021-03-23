@@ -45,14 +45,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            /*gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [Colors.green.shade900, Colors.red],
               stops: [1, 0.2],
-            ),
+            ),*/
           ),
-          child: Text('Welcome ${loggedInUser.email}!'),
+          child: Text('Welcome!'),
         ),
       ),
     );
